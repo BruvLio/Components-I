@@ -116,56 +116,48 @@ const data = [
   Refresh the page to see the new article.
 */
 
+
 function articleMaker(article){
-  
-  let title = document.createElement('h2');
-  let paragraph = document.createElement('p');
-  let span = document.createElement('span');
-  span.classList.add('expandButton')
-  span.textContent = "+";
 
-  title.textContent = "title of the article";
-  paragraph.textContent = "date of the article"
-  paragraph.classList.add('date')
+  let articleContainer = document.createElement('div');
+  articleContainer.classList.add('article');
 
-  span.addEventListener('click', (event) => {
-    event.classList.toggle('article-open')
+  let articleTitle = document.createElement('h2');
+  articleTitle.textContent = article.title
+
+  let articleDate = document.createElement('p');
+  articleDate.classList.add('date');
+  articleDate.textContent = article.date;
+
+  let paragraphOne = document.createElement('p');
+  paragraphOne.textContent = article.firstParagraph
+  let paragraphTwo = document.createElement('p');
+  paragraphTwo.textContent = article.secondParagraph
+  let paragraphThree = document.createElement('p');
+  paragraphThree.textContent = article.thirdParagraph
+
+  let expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = "+";
+
+articleContainer.appendChild(articleTitle);
+articleContainer.appendChild(articleDate);
+articleContainer.appendChild(paragraphOne);
+articleContainer.appendChild(paragraphTwo);
+articleContainer.appendChild(paragraphThree);
+articleContainer.appendChild(expandButton);
+
+  expandButton.addEventListener('click', () => {
+    articleContainer.classList.toggle('article-open')
   })
  
-  return article
-
+  return articleContainer
 }
 
-let span = articleMaker()
-let article = articleMaker(article)
-let container = document.querySelector('.article')
+let articles = document.querySelector('.articles')
 
-container.appendChild()
-span.appendChild()
+data.forEach(article => {
+  let newArticle = articleMaker(article);
 
-
-
-
-
-
-
-
-
-
-// function articleMaker(article){
-//   let articleMaker = document.createElement('article')
-
-//   article.textContent = articleText;
-
-//   article.classList.add('article');
-
-//   article.adEventListener('click', (e) => {
-//     console.log('clicked!');
-//   })
-//   return articleMaker
-// }
-
-// let firstArticle = articleMaker('article 1')
-
-// let secondArticle = articleMaker('article 2')
-
+  articles.appendChild(newArticle);
+});
